@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Extractor - YouTube SEO Tools 2.0</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="top-bar"><div class="top-bar-inner container"><div class="top-left"><span class="date-display"><i class="fas fa-calendar-alt"></i> <span id="topDate"></span></span><span class="time-display"><i class="fas fa-clock"></i> <span id="topTime"></span></span></div><div class="top-right"><button class="top-btn" onclick="toggleHistory()"><i class="fas fa-history"></i><span class="hide-mobile"> History</span></button><button class="top-btn" onclick="location.href='settings.html'"><i class="fas fa-cog"></i></button></div></div></div>
+<div class="history-overlay" id="historyOverlay" onclick="toggleHistory()"></div>
+<aside class="history-panel" id="historyPanel"><div class="history-head"><h3><i class="fas fa-history"></i> History</h3><button onclick="toggleHistory()" class="close-x">&times;</button></div><div class="history-search-box"><input type="text" id="historySearchInput" placeholder="🔍 Search..." oninput="searchHistory()"></div><div class="history-items" id="historyItems"></div><div class="history-foot"><button onclick="clearHistory()" class="btn-danger-sm"><i class="fas fa-trash"></i> Clear</button></div></aside>
+
+<header class="main-header"><div class="header-inner container"><a href="index.html" class="logo-area"><div class="logo-icon-wrap"><i class="fab fa-youtube"></i></div><div class="logo-text-wrap"><span class="logo-name">YouTube SEO Tools</span><span class="logo-ver">2.0</span></div></a><nav class="desktop-nav"><a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a><a href="script-generator.html" class="nav-item"><i class="fas fa-scroll"></i> Script</a><a href="idea-generator.html" class="nav-item"><i class="fas fa-lightbulb"></i> Idea</a><a href="image-extractor.html" class="nav-item active"><i class="fas fa-image"></i> Image</a><a href="voice-over.html" class="nav-item"><i class="fas fa-microphone-alt"></i> Voice</a><a href="video-extractor.html" class="nav-item"><i class="fas fa-film"></i> Video</a><a href="download.html" class="nav-item"><i class="fas fa-cloud-download-alt"></i> Download</a></nav><button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button></div></header>
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<nav class="mobile-menu" id="mobileMenu"><div class="mobile-menu-head"><span>Menu</span><button onclick="toggleMobileMenu()" class="close-x">&times;</button></div><a href="index.html" class="mob-link"><i class="fas fa-home"></i> Home</a><a href="script-generator.html" class="mob-link"><i class="fas fa-scroll"></i> Script</a><a href="idea-generator.html" class="mob-link"><i class="fas fa-lightbulb"></i> Idea</a><a href="image-extractor.html" class="mob-link active"><i class="fas fa-image"></i> Image</a><a href="voice-over.html" class="mob-link"><i class="fas fa-microphone-alt"></i> Voice</a><a href="video-extractor.html" class="mob-link"><i class="fas fa-film"></i> Video</a><a href="download.html" class="mob-link"><i class="fas fa-cloud-download-alt"></i> Download</a></nav>
+
+<section class="page-hero"><div class="container"><h2><i class="fas fa-image"></i> Image Prompt Extractor</h2><p>ছবি আপলোড করুন — Image Prompt ও Video Prompt আলাদাভাবে পান</p></div></section>
+
+<section class="gen-section"><div class="container"><div class="gen-grid">
+<div class="gen-panel input-panel">
+    <div class="panel-head"><i class="fas fa-upload"></i> Upload Image</div>
+    <div class="panel-body">
+        <!-- Upload Area -->
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imgFileInput').click()">
+            <div class="upload-placeholder" id="uploadPlaceholder">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h4>Click or Drag & Drop</h4>
+                <p>JPG, PNG, WEBP — Max 100MB</p>
+            </div>
+            <div class="upload-preview" id="uploadPreview" style="display:none">
+                <img id="previewImg" src="" alt="Preview">
+                <button class="remove-img-btn" onclick="removeUploadedImage(event)"><i class="fas fa-times"></i></button>
+            </div>
+            <input type="file" id="imgFileInput" accept="image/*" onchange="handleImageSelect(event)" hidden>
+        </div>
+        <div class="field"><label>Prompt Style</label>
+            <select id="imgStyle" class="styled-select">
+                <option value="midjourney">Midjourney Style</option>
+                <option value="dalle">DALL-E Style</option>
+                <option value="stable_diffusion">Stable Diffusion</option>
+                <option value="cinematic">Cinematic</option>
+                <option value="detailed">Detailed Description</option>
+            </select>
+        </div>
+        <button class="btn-primary btn-full" onclick="extractFromImage()"><i class="fas fa-magic"></i> Extract Prompts</button>
+    </div>
+</div>
+<div class="gen-panel output-panel">
+    <div class="panel-head"><span><i class="fas fa-file-alt"></i> Extracted Prompts</span><div class="panel-actions"><button onclick="copyOutput('imgOutput')" class="icon-btn"><i class="fas fa-copy"></i></button><button onclick="downloadOutput('imgOutput')" class="icon-btn"><i class="fas fa-download"></i></button><button onclick="extractFromImage()" class="icon-btn" id="imgRegenBtn" style="display:none"><i class="fas fa-redo"></i></button></div></div>
+    <div class="version-bar" id="imgVersionBar" style="display:none"><span>Version:</span><div class="version-btns" id="imgVersionBtns"></div><button onclick="extractFromImage()" class="btn-more-ver"><i class="fas fa-plus"></i></button></div>
+    <div class="panel-body output-body" id="imgOutput"><div class="empty-msg"><i class="fas fa-image"></i><p>ছবি আপলোড করে Extract করুন</p></div></div>
+    <div class="output-tabs" id="imgTabs" style="display:none">
+        <button class="otab active" onclick="switchImgTab('all',this)">📋 All</button>
+        <button class="otab" onclick="switchImgTab('image',this)">🖼️ Image Prompt</button>
+        <button class="otab" onclick="switchImgTab('video',this)">🎬 Video Prompt</button>
+        <button class="otab" onclick="switchImgTab('story',this)">📖 Story Prompt</button>
+    </div>
+</div>
+</div></div></section>
+
+<nav class="bottom-nav"><a href="index.html" class="bn-item"><i class="fas fa-home"></i><span>Home</span></a><a href="script-generator.html" class="bn-item"><i class="fas fa-scroll"></i><span>Script</span></a><a href="idea-generator.html" class="bn-item"><i class="fas fa-lightbulb"></i><span>Idea</span></a><a href="image-extractor.html" class="bn-item active"><i class="fas fa-image"></i><span>Image</span></a><a href="download.html" class="bn-item"><i class="fas fa-download"></i><span>Download</span></a></nav>
+<div class="loading-screen" id="loadingScreen"><div class="loader-box"><div class="spinner"></div><p id="loadingText">Analyzing Image...</p></div></div>
+<div class="toast-area" id="toastArea"></div>
+<footer class="main-footer"><div class="footer-inner container"><div class="footer-brand"><i class="fab fa-youtube"></i> YouTube SEO Tools 2.0</div><p>&copy; 2025</p></div></footer>
+<script src="js/gemini-api.js"></script><script src="js/history.js"></script><script src="js/app.js"></script>
+</body>
+</html>

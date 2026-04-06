@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Generate - YouTube SEO Tools 2.0</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="top-bar"><div class="top-bar-inner container"><div class="top-left"><span class="date-display"><i class="fas fa-calendar-alt"></i> <span id="topDate"></span></span><span class="time-display"><i class="fas fa-clock"></i> <span id="topTime"></span></span></div><div class="top-right"><button class="top-btn" onclick="toggleHistory()"><i class="fas fa-history"></i> <span class="hide-mobile">History</span></button><button class="top-btn" onclick="location.href='settings.html'"><i class="fas fa-cog"></i></button></div></div></div>
+<div class="history-overlay" id="historyOverlay" onclick="toggleHistory()"></div>
+<aside class="history-panel" id="historyPanel"><div class="history-head"><h3><i class="fas fa-history"></i> History</h3><button onclick="toggleHistory()" class="close-x">&times;</button></div><div class="history-search-box"><input type="text" id="historySearchInput" placeholder="🔍 Search..." oninput="searchHistory()"></div><div class="history-items" id="historyItems"></div><div class="history-foot"><button onclick="clearHistory()" class="btn-danger-sm"><i class="fas fa-trash"></i> Clear</button></div></aside>
+
+<header class="main-header"><div class="header-inner container"><a href="index.html" class="logo-area"><div class="logo-icon-wrap"><i class="fab fa-youtube"></i></div><div class="logo-text-wrap"><span class="logo-name">YouTube SEO Tools</span><span class="logo-ver">2.0</span></div></a><nav class="desktop-nav"><a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a><a href="script-generator.html" class="nav-item"><i class="fas fa-scroll"></i> Script</a><a href="idea-generator.html" class="nav-item active"><i class="fas fa-lightbulb"></i> Idea</a><a href="image-extractor.html" class="nav-item"><i class="fas fa-image"></i> Image</a><a href="voice-over.html" class="nav-item"><i class="fas fa-microphone-alt"></i> Voice</a><a href="video-extractor.html" class="nav-item"><i class="fas fa-film"></i> Video</a><a href="download.html" class="nav-item"><i class="fas fa-cloud-download-alt"></i> Download</a></nav><button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button></div></header>
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<nav class="mobile-menu" id="mobileMenu"><div class="mobile-menu-head"><span>Menu</span><button onclick="toggleMobileMenu()" class="close-x">&times;</button></div><a href="index.html" class="mob-link"><i class="fas fa-home"></i> Home</a><a href="script-generator.html" class="mob-link"><i class="fas fa-scroll"></i> Script</a><a href="idea-generator.html" class="mob-link active"><i class="fas fa-lightbulb"></i> Idea</a><a href="image-extractor.html" class="mob-link"><i class="fas fa-image"></i> Image</a><a href="voice-over.html" class="mob-link"><i class="fas fa-microphone-alt"></i> Voice</a><a href="video-extractor.html" class="mob-link"><i class="fas fa-film"></i> Video</a><a href="download.html" class="mob-link"><i class="fas fa-cloud-download-alt"></i> Download</a><a href="settings.html" class="mob-link"><i class="fas fa-cog"></i> Settings</a></nav>
+
+<section class="page-hero"><div class="container"><h2><i class="fas fa-lightbulb"></i> Idea Generator</h2><p>ট্রেন্ডিং এবং ইউনিক ভিডিও আইডিয়া জেনারেট করুন</p></div></section>
+
+<section class="gen-section"><div class="container"><div class="gen-grid">
+<div class="gen-panel input-panel">
+    <div class="panel-head"><i class="fas fa-edit"></i> Input</div>
+    <div class="panel-body">
+        <div class="field"><label>Niche / Category</label>
+            <select id="ideaNiche" class="styled-select" onchange="document.getElementById('customNicheField').style.display=this.value==='custom'?'block':'none'">
+                <option value="technology">🖥️ Technology</option>
+                <option value="gaming">🎮 Gaming</option>
+                <option value="education">📚 Education</option>
+                <option value="entertainment">🎭 Entertainment</option>
+                <option value="lifestyle">🌟 Lifestyle</option>
+                <option value="cooking">🍳 Cooking</option>
+                <option value="travel">✈️ Travel</option>
+                <option value="fitness">💪 Fitness</option>
+                <option value="finance">💰 Finance</option>
+                <option value="music">🎵 Music</option>
+                <option value="news">📰 News</option>
+                <option value="custom">✏️ Custom</option>
+            </select>
+        </div>
+        <div class="field" id="customNicheField" style="display:none">
+            <label>Custom Niche</label>
+            <input type="text" id="customNiche" class="styled-input" placeholder="Enter your niche...">
+        </div>
+        <div class="field"><label>Number of Ideas</label>
+            <select id="ideaCount" class="styled-select">
+                <option value="5">5 Ideas</option>
+                <option value="10" selected>10 Ideas</option>
+                <option value="20">20 Ideas</option>
+            </select>
+        </div>
+        <div class="field"><label>Target Audience (Optional)</label>
+            <input type="text" id="ideaAudience" class="styled-input" placeholder="e.g., Students, Young adults">
+        </div>
+        <div class="field"><label>Language</label>
+            <select id="ideaLang" class="styled-select">
+                <option value="bangla">বাংলা</option>
+                <option value="english">English</option>
+            </select>
+        </div>
+        <button class="btn-primary btn-full" onclick="generateIdeas()"><i class="fas fa-lightbulb"></i> Generate Ideas</button>
+    </div>
+</div>
+<div class="gen-panel output-panel">
+    <div class="panel-head"><span><i class="fas fa-list"></i> Ideas</span><div class="panel-actions"><button onclick="copyOutput('ideaOutput')" class="icon-btn"><i class="fas fa-copy"></i></button><button onclick="downloadOutput('ideaOutput')" class="icon-btn"><i class="fas fa-download"></i></button><button onclick="generateIdeas()" class="icon-btn" id="ideaRegenBtn" style="display:none"><i class="fas fa-redo"></i></button></div></div>
+    <div class="version-bar" id="ideaVersionBar" style="display:none"><span>Set:</span><div class="version-btns" id="ideaVersionBtns"></div><button onclick="generateIdeas()" class="btn-more-ver"><i class="fas fa-plus"></i></button></div>
+    <div class="panel-body output-body" id="ideaOutput"><div class="empty-msg"><i class="fas fa-lightbulb"></i><p>আইডিয়া এখানে দেখাবে</p></div></div>
+</div>
+</div></div></section>
+
+<nav class="bottom-nav"><a href="index.html" class="bn-item"><i class="fas fa-home"></i><span>Home</span></a><a href="script-generator.html" class="bn-item"><i class="fas fa-scroll"></i><span>Script</span></a><a href="idea-generator.html" class="bn-item active"><i class="fas fa-lightbulb"></i><span>Idea</span></a><a href="image-extractor.html" class="bn-item"><i class="fas fa-image"></i><span>Image</span></a><a href="download.html" class="bn-item"><i class="fas fa-download"></i><span>Download</span></a></nav>
+<div class="loading-screen" id="loadingScreen"><div class="loader-box"><div class="spinner"></div><p id="loadingText">Generating...</p></div></div>
+<div class="toast-area" id="toastArea"></div>
+<footer class="main-footer"><div class="footer-inner container"><div class="footer-brand"><i class="fab fa-youtube"></i> YouTube SEO Tools 2.0</div><p>&copy; 2025</p></div></footer>
+<script src="js/gemini-api.js"></script><script src="js/history.js"></script><script src="js/app.js"></script>
+</body>
+</html>

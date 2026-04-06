@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="YouTube SEO Tools 2.0 - AI Powered Content Generator with Gemini">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="manifest" href="manifest.json">
+    <title>YouTube SEO Tools 2.0</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Top Info Bar -->
+<div class="top-bar">
+    <div class="top-bar-inner container">
+        <div class="top-left">
+            <span class="date-display"><i class="fas fa-calendar-alt"></i> <span id="topDate">Loading...</span></span>
+            <span class="time-display"><i class="fas fa-clock"></i> <span id="topTime">--:--:--</span></span>
+        </div>
+        <div class="top-right">
+            <button class="top-btn" onclick="toggleHistory()" title="History">
+                <i class="fas fa-history"></i> <span class="hide-mobile">History</span>
+            </button>
+            <button class="top-btn" onclick="location.href='settings.html'" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- History Panel -->
+<div class="history-overlay" id="historyOverlay" onclick="toggleHistory()"></div>
+<aside class="history-panel" id="historyPanel">
+    <div class="history-head">
+        <h3><i class="fas fa-history"></i> Recent History</h3>
+        <button onclick="toggleHistory()" class="close-x">&times;</button>
+    </div>
+    <div class="history-search-box">
+        <input type="text" id="historySearchInput" placeholder="🔍 Search history..." oninput="searchHistory()">
+    </div>
+    <div class="history-items" id="historyItems">
+        <div class="empty-msg"><i class="fas fa-inbox"></i><p>No history yet</p></div>
+    </div>
+    <div class="history-foot">
+        <button onclick="clearHistory()" class="btn-danger-sm"><i class="fas fa-trash"></i> Clear All</button>
+    </div>
+</aside>
+
+<!-- Header / Navbar -->
+<header class="main-header" id="mainHeader">
+    <div class="header-inner container">
+        <a href="index.html" class="logo-area">
+            <div class="logo-icon-wrap">
+                <i class="fab fa-youtube"></i>
+            </div>
+            <div class="logo-text-wrap">
+                <span class="logo-name">YouTube SEO Tools</span>
+                <span class="logo-ver">2.0 <small>AI</small></span>
+            </div>
+        </a>
+
+        <nav class="desktop-nav" id="desktopNav">
+            <a href="index.html" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+            <a href="script-generator.html" class="nav-item"><i class="fas fa-scroll"></i> Script & Video</a>
+            <a href="idea-generator.html" class="nav-item"><i class="fas fa-lightbulb"></i> Idea Generate</a>
+            <a href="image-extractor.html" class="nav-item"><i class="fas fa-image"></i> Image Extractor</a>
+            <a href="voice-over.html" class="nav-item"><i class="fas fa-microphone-alt"></i> Voice Over</a>
+            <a href="video-extractor.html" class="nav-item"><i class="fas fa-film"></i> Video Extractor</a>
+            <a href="download.html" class="nav-item"><i class="fas fa-cloud-download-alt"></i> Download</a>
+        </nav>
+
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<nav class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-head">
+        <span>Menu</span>
+        <button onclick="toggleMobileMenu()" class="close-x">&times;</button>
+    </div>
+    <a href="index.html" class="mob-link active"><i class="fas fa-home"></i> Home</a>
+    <a href="script-generator.html" class="mob-link"><i class="fas fa-scroll"></i> Script & Video Generator</a>
+    <a href="idea-generator.html" class="mob-link"><i class="fas fa-lightbulb"></i> Idea Generate</a>
+    <a href="image-extractor.html" class="mob-link"><i class="fas fa-image"></i> Image Extractor</a>
+    <a href="voice-over.html" class="mob-link"><i class="fas fa-microphone-alt"></i> Voice Over</a>
+    <a href="video-extractor.html" class="mob-link"><i class="fas fa-film"></i> Video Extractor</a>
+    <a href="download.html" class="mob-link"><i class="fas fa-cloud-download-alt"></i> Download</a>
+    <a href="settings.html" class="mob-link"><i class="fas fa-cog"></i> Settings</a>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content container">
+        <div class="hero-left">
+            <div class="hero-badge"><i class="fas fa-robot"></i> AI Powered Tool</div>
+            <h1 class="hero-title">YouTube SEO Tools <span class="highlight">2.0</span></h1>
+            <p class="hero-desc">AI-চালিত কন্টেন্ট জেনারেটর — স্ক্রিপ্ট, ভিডিও আইডিয়া, ইমেজ প্রম্পট, ভয়েস ওভার এবং আরও অনেক কিছু। Google Gemini AI দিয়ে ফ্রিতে ব্যবহার করুন!</p>
+            <div class="hero-btns">
+                <a href="#tools" class="btn-primary"><i class="fas fa-rocket"></i> Get Started</a>
+                <a href="settings.html" class="btn-outline"><i class="fas fa-key"></i> Setup API</a>
+            </div>
+            <div class="hero-stats">
+                <div class="h-stat">
+                    <strong id="statGenerated">0</strong>
+                    <span>Generated</span>
+                </div>
+                <div class="h-stat">
+                    <strong>6+</strong>
+                    <span>Tools</span>
+                </div>
+                <div class="h-stat">
+                    <strong>Free</strong>
+                    <span>Gemini AI</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-illustration">
+                <div class="float-card fc-1"><i class="fas fa-video"></i> Script</div>
+                <div class="float-card fc-2"><i class="fas fa-lightbulb"></i> Ideas</div>
+                <div class="float-card fc-3"><i class="fas fa-image"></i> Prompts</div>
+                <div class="hero-circle"></div>
+                <i class="fab fa-youtube hero-yt-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="hero-wave">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="var(--bg-main)"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section class="tools-section" id="tools">
+    <div class="container">
+        <div class="section-head">
+            <span class="section-badge">All Tools</span>
+            <h2>সকল AI Tools ব্যবহার করুন</h2>
+            <p>YouTube কন্টেন্ট তৈরির জন্য প্রয়োজনীয় সব টুলস এক জায়গায়</p>
+        </div>
+        <div class="tools-grid">
+            <a href="script-generator.html" class="tool-card tc-1">
+                <div class="tc-icon"><i class="fas fa-scroll"></i></div>
+                <h3>Script & Video Generator</h3>
+                <p>AI দিয়ে প্রফেশনাল ভিডিও স্ক্রিপ্ট, SEO Title, Tags সহ তৈরি করুন</p>
+                <span class="tc-badge">Popular</span>
+                <div class="tc-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="idea-generator.html" class="tool-card tc-2">
+                <div class="tc-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>Idea Generate</h3>
+                <p>ট্রেন্ডিং এবং ইউনিক ভিডিও আইডিয়া জেনারেট করুন</p>
+                <span class="tc-badge tc-new">New</span>
+                <div class="tc-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="image-extractor.html" class="tool-card tc-3">
+                <div class="tc-icon"><i class="fas fa-image"></i></div>
+                <h3>Image Extractor</h3>
+                <p>ছবি থেকে Image Prompt ও Video Prompt আলাদাভাবে পান</p>
+                <span class="tc-badge tc-hot">Hot</span>
+                <div class="tc-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="voice-over.html" class="tool-card tc-4">
+                <div class="tc-icon"><i class="fas fa-microphone-alt"></i></div>
+                <h3>Voice Over</h3>
+                <p>প্রফেশনাল ভয়েস ওভার স্ক্রিপ্ট তৈরি করুন</p>
+                <div class="tc-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="video-extractor.html" class="tool-card tc-5">
+                <div class="tc-icon"><i class="fas fa-film"></i></div>
+                <h3>Video Extractor</h3>
+                <p>ভিডিও থেকে প্রম্পট এক্সট্রাক্ট করুন</p>
+                <div class="tc-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="download.html" class="tool-card tc-6">
+                <div class="tc-icon"><i class="fas fa-cloud-download-alt"></i></div>
+                <h3>Download Center</h3>
+                <p>সকল জেনারেটেড কন্টেন্ট ডাউনলোড করুন</p>
+                <div class="tc-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="section-badge">How it Works</span>
+            <h2>কিভাবে কাজ করে?</h2>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <div class="step-icon"><i class="fas fa-key"></i></div>
+                <h4>API Key সেটআপ</h4>
+                <p>Settings পেজে গিয়ে Gemini API Key বসান</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <div class="step-icon"><i class="fas fa-edit"></i></div>
+                <h4>টপিক লিখুন</h4>
+                <p>আপনার বিষয় বা কীওয়ার্ড ইনপুট দিন</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <div class="step-icon"><i class="fas fa-magic"></i></div>
+                <h4>AI Generate</h4>
+                <p>Gemini AI ইউনিক কন্টেন্ট তৈরি করবে</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <div class="step-icon"><i class="fas fa-download"></i></div>
+                <h4>ডাউনলোড করুন</h4>
+                <p>পছন্দের ভার্শন বেছে নিয়ে ডাউনলোড করুন</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUICK GENERATE -->
+<section class="quick-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="section-badge"><i class="fas fa-bolt"></i> Quick Generate</span>
+            <h2>দ্রুত জেনারেট করুন</h2>
+        </div>
+        <div class="quick-box">
+            <div class="quick-top-row">
+                <select id="quickType" class="styled-select">
+                    <option value="video_script">📝 Video Script</option>
+                    <option value="video_idea">💡 Video Idea</option>
+                    <option value="image_prompt">🖼️ Image Prompt</option>
+                    <option value="video_prompt">🎬 Video Prompt</option>
+                    <option value="voice_over">🎙️ Voice Over</option>
+                    <option value="seo_title">🔍 SEO Title</option>
+                    <option value="seo_tags">🏷️ SEO Tags</option>
+                    <option value="seo_description">📄 SEO Description</option>
+                </select>
+            </div>
+            <textarea id="quickInput" placeholder="আপনার টপিক বা কীওয়ার্ড লিখুন..." rows="3"></textarea>
+            <div class="quick-actions">
+                <button class="btn-primary" onclick="quickGenerate()"><i class="fas fa-magic"></i> Generate</button>
+                <button class="btn-outline" id="quickRegenBtn" onclick="quickGenerate()" style="display:none"><i class="fas fa-redo"></i> Regenerate</button>
+            </div>
+            <div class="quick-results" id="quickResults" style="display:none">
+                <div class="qr-header">
+                    <h4><i class="fas fa-check-circle"></i> Generated Results</h4>
+                    <div class="qr-actions">
+                        <button onclick="copyQuickResult()" class="icon-btn" title="Copy"><i class="fas fa-copy"></i></button>
+                        <button onclick="downloadQuickResult()" class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="qr-versions" id="quickVersions"></div>
+                <div class="qr-content" id="quickContent"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="section-badge">Features</span>
+            <h2>বিশেষ ফিচারসমূহ</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feat-card">
+                <i class="fas fa-infinity"></i>
+                <h4>Unlimited Generate</h4>
+                <p>যতবার খুশি জেনারেট করুন</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-fingerprint"></i>
+                <h4>Always Unique</h4>
+                <p>কখনো একই প্রম্পট আসবে না</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-language"></i>
+                <h4>Multi Language</h4>
+                <p>বাংলা, English, হিন্দি সাপোর্ট</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>Fully Responsive</h4>
+                <p>মোবাইল ও ডেস্কটপে সমানভাবে কাজ করে</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Secure & Private</h4>
+                <p>আপনার ডাটা শুধু আপনার ডিভাইসে</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-bolt"></i>
+                <h4>Super Fast</h4>
+                <p>সেকেন্ডের মধ্যে রেজাল্ট পান</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,40 C480,100 960,0 1440,40 L1440,0 L0,0 Z" fill="var(--bg-main)"></path>
+        </svg>
+    </div>
+    <div class="footer-inner container">
+        <div class="footer-brand">
+            <i class="fab fa-youtube"></i> YouTube SEO Tools 2.0
+        </div>
+        <p>Powered by Google Gemini AI | &copy; 2025 All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="settings.html">Settings</a>
+            <a href="download.html">Downloads</a>
+        </div>
+    </div>
+</footer>
+
+<!-- BOTTOM NAV (Mobile) -->
+<nav class="bottom-nav" id="bottomNav">
+    <a href="index.html" class="bn-item active"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="script-generator.html" class="bn-item"><i class="fas fa-scroll"></i><span>Script</span></a>
+    <a href="idea-generator.html" class="bn-item"><i class="fas fa-lightbulb"></i><span>Idea</span></a>
+    <a href="image-extractor.html" class="bn-item"><i class="fas fa-image"></i><span>Image</span></a>
+    <a href="download.html" class="bn-item"><i class="fas fa-download"></i><span>Download</span></a>
+</nav>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loader-box">
+        <div class="spinner"></div>
+        <p id="loadingText">AI Generating...</p>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-area" id="toastArea"></div>
+
+<script src="js/gemini-api.js"></script>
+<script src="js/history.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

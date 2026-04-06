@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - YouTube SEO Tools 2.0</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="top-bar"><div class="top-bar-inner container"><div class="top-left"><span class="date-display"><i class="fas fa-calendar-alt"></i> <span id="topDate"></span></span><span class="time-display"><i class="fas fa-clock"></i> <span id="topTime"></span></span></div><div class="top-right"><button class="top-btn" onclick="location.href='index.html'"><i class="fas fa-home"></i></button></div></div></div>
+
+<header class="main-header"><div class="header-inner container"><a href="index.html" class="logo-area"><div class="logo-icon-wrap"><i class="fab fa-youtube"></i></div><div class="logo-text-wrap"><span class="logo-name">YouTube SEO Tools</span><span class="logo-ver">2.0</span></div></a><nav class="desktop-nav"><a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a><a href="script-generator.html" class="nav-item"><i class="fas fa-scroll"></i> Script</a><a href="idea-generator.html" class="nav-item"><i class="fas fa-lightbulb"></i> Idea</a><a href="image-extractor.html" class="nav-item"><i class="fas fa-image"></i> Image</a><a href="voice-over.html" class="nav-item"><i class="fas fa-microphone-alt"></i> Voice</a><a href="video-extractor.html" class="nav-item"><i class="fas fa-film"></i> Video</a><a href="download.html" class="nav-item"><i class="fas fa-cloud-download-alt"></i> Download</a></nav><button class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button></div></header>
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<nav class="mobile-menu" id="mobileMenu"><div class="mobile-menu-head"><span>Menu</span><button onclick="toggleMobileMenu()" class="close-x">&times;</button></div><a href="index.html" class="mob-link"><i class="fas fa-home"></i> Home</a><a href="settings.html" class="mob-link active"><i class="fas fa-cog"></i> Settings</a></nav>
+
+<section class="page-hero"><div class="container"><h2><i class="fas fa-cog"></i> Settings</h2><p>API কনফিগারেশন ও অ্যাপ সেটিংস</p></div></section>
+
+<section class="settings-section"><div class="container settings-container">
+
+<!-- Gemini API -->
+<div class="settings-card">
+    <div class="sc-head">
+        <h3><i class="fas fa-bolt"></i> Groq AI (Free — বাংলাদেশে কাজ করে!)</h3>
+        <span class="badge-required">Required</span>
+    </div>
+    <div class="sc-body">
+        <div class="field">
+            <label><i class="fas fa-key"></i> Groq API Key</label>
+            <div class="input-row">
+                <input type="password" id="geminiApiKey" class="styled-input" placeholder="gsk_...">
+                <button onclick="togglePass('geminiApiKey')" class="icon-btn"><i class="fas fa-eye"></i></button>
+            </div>
+            <small>Free API Key পান: <a href="https://console.groq.com/keys" target="_blank" style="color:var(--primary)">console.groq.com/keys</a></small>
+        </div>
+        <div class="field">
+            <label>Model</label>
+            <select id="geminiModel" class="styled-select">
+                <option value="llama-3.3-70b-versatile">Llama 3.3 70B (Recommended)</option>
+                <option value="llama-3.1-8b-instant">Llama 3.1 8B (Fast)</option>
+                <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+            </select>
+        </div>
+        <div class="settings-actions">
+            <button onclick="testGeminiConnection()" class="btn-primary"><i class="fas fa-plug"></i> Test Connection</button>
+            <button onclick="saveGeminiSettings()" class="btn-success"><i class="fas fa-save"></i> Save</button>
+        </div>
+        <div class="connection-result" id="connectionResult"></div>
+
+        <div class="api-guide">
+            <h4>📖 কিভাবে Free Groq API Key পাবেন:</h4>
+            <ol>
+                <li><a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a> এ যান</li>
+                <li>Account বানান বা Sign In করুন (সম্পূর্ণ ফ্রি)</li>
+                <li>"Create API Key" বাটনে ক্লিক করুন</li>
+                <li>API Key কপি করে উপরে পেস্ট করুন</li>
+                <li>"Save" বাটনে ক্লিক করুন — ব্যাস!</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- App Settings -->
+<div class="settings-card">
+    <div class="sc-head"><h3><i class="fas fa-palette"></i> App Settings</h3></div>
+    <div class="sc-body">
+        <div class="field"><label>Theme</label>
+            <select id="appTheme" class="styled-select" onchange="setTheme(this.value)">
+                <option value="dark">🌙 Dark</option>
+                <option value="light">☀️ Light</option>
+            </select>
+        </div>
+        <div class="field"><label>Default Language</label>
+            <select id="defaultLang" class="styled-select">
+                <option value="bangla">বাংলা</option>
+                <option value="english">English</option>
+            </select>
+        </div>
+        <button onclick="saveAppSettings()" class="btn-success"><i class="fas fa-save"></i> Save Settings</button>
+    </div>
+</div>
+
+</div></section>
+
+<nav class="bottom-nav"><a href="index.html" class="bn-item"><i class="fas fa-home"></i><span>Home</span></a><a href="script-generator.html" class="bn-item"><i class="fas fa-scroll"></i><span>Script</span></a><a href="idea-generator.html" class="bn-item"><i class="fas fa-lightbulb"></i><span>Idea</span></a><a href="image-extractor.html" class="bn-item"><i class="fas fa-image"></i><span>Image</span></a><a href="download.html" class="bn-item"><i class="fas fa-download"></i><span>Download</span></a></nav>
+<div class="toast-area" id="toastArea"></div>
+<footer class="main-footer"><div class="footer-inner container"><div class="footer-brand"><i class="fab fa-youtube"></i> YouTube SEO Tools 2.0</div><p>&copy; 2025</p></div></footer>
+<script src="js/gemini-api.js"></script><script src="js/history.js"></script><script src="js/app.js"></script>
+</body>
+</html>
